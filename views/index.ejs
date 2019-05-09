@@ -11,6 +11,11 @@
     height      : 500px;
     font-size   : 11px;
 		}
+		#chartdiv2 {
+    width       : 100%;
+    height      : 500px;
+    font-size   : 11px;	
+		}
 	</style>
 </head>
 <body>
@@ -18,7 +23,8 @@
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js"></script>
-<div id="chartdiv1">tushar</div>
+<div id="chartdiv1"></div>
+<div id="chartdiv2" class="none"></div>
 
 <script>
 
@@ -92,6 +98,90 @@ var chart1 = AmCharts.makeChart( "chartdiv1", {
 } );
 
 } );
+
+AmCharts.loadFile( "http://localhost:7000/assets/csv/timeseries.csv", {}, function( response ) {
+
+/**
+ * Parse CSV
+ */
+var data = AmCharts.parseCSV( response, {
+	"useColumnNames": true
+} );
+
+console.log(data);
+
+
+/**
+ * Create the chart
+ */
+var chart2 = AmCharts.makeChart( "chartdiv2", {
+	"type": "serial",
+    "theme": "none",
+    "legend": {
+        "useGraphSettings": true
+    },
+    "dataLoader": {
+	  "async": true,
+      "url": "http://localhost:7000/assets/csv/timeseries.csv",
+      "format": "csv",
+      "delimiter": ",",       // column separator
+      "useColumnNames": true, // use first row for column names
+      "skip": 1               // skip header row
+    },
+	"synchronizeGrid":true,
+	"dataDateFormat": "DD.MM.YYYY",
+    "valueAxes": [{
+        "id":"v1",
+        "axisColor": "#FF6600",
+        "axisThickness": 2,
+        "axisAlpha": 1,
+        "position": "left"
+    }, {
+        "id":"v2",
+        "axisColor": "#FCD202",
+        "axisThickness": 2,
+        "axisAlpha": 1,
+        "position": "right"
+    }],
+    "graphs": [{
+        "valueAxis": "v1",
+        "lineColor": "#FF6600",
+        "bullet": "round",
+        "bulletBorderThickness": 1,
+        "hideBulletsCount": 30,
+        "title": "red line",
+        "valueField": "visits",
+        "fillAlphas": 0,
+        "balloonText": "[[category]]: <b>[[value]]</b>",
+    }, {
+        "valueAxis": "v2",
+        "lineColor": "#FCD202",
+        "bullet": "square",
+        "bulletBorderThickness": 1,
+        "hideBulletsCount": 30,
+        "title": "yellow line",
+        "valueField": "Verbrauch (Strom) - E001002_0_000000000000000",
+        "fillAlphas": 0,
+        "balloonText": "[[category]]: <b>[[value]]</b>",
+    }],
+    "chartScrollbar": {},
+    "chartCursor": {
+        "cursorPosition": "mouse"
+    },
+    "categoryField": "Datenreihe",
+    "categoryAxis": {
+		"gridPosition": "start",
+		"gridAlpha": 0,
+		"tickPosition": "start",
+		"tickLength": 20
+	},
+    "export": {
+    	"enabled": true,
+        "position": "bottom-right"
+     }
+} );
+
+});
 
 </script>
 </body>
