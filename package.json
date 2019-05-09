@@ -1,0 +1,24 @@
+{
+  "name": "javascriptapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgupta0421/JavaScriptAssignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  },
+  "bugs": {
+    "url": "https://github.com/mgupta0421/JavaScriptAssignment/issues"
+  },
+  "homepage": "https://github.com/mgupta0421/JavaScriptAssignment#readme"
+}
