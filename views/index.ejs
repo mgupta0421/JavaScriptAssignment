@@ -16,6 +16,10 @@
     height      : 500px;
     font-size   : 11px;	
 		}
+		.none{
+	display:none
+		}
+
 	</style>
 </head>
 <body>
@@ -25,9 +29,18 @@
 <script src="https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js"></script>
 <div id="chartdiv1"></div>
 <div id="chartdiv2" class="none"></div>
+<div>
+	<button onclick="myFunction()">Toggle Chart</button>
+</div>
 
 <script>
+function myFunction() {
+  var x = document.getElementById("chartdiv1");
+  var y = document.getElementById("chartdiv2");
+  x.classList.toggle("none");
+  y.classList.toggle("none");
 
+}
 
 
 //chart 1
